@@ -150,11 +150,11 @@
           <div class="widget-content">
             <div id="searchbox">
               <input type="text" placeholder="請輸入搜尋關鍵字" accesskey="s"
-                (input)="calcLength($event.target.value)"
-                (keydown.escape)="cleanInput($event.target)">
+                [(ngModel)]="inputValue"
+                (keydown.escape)="cleanInput()">
               <input type="button" value="搜尋" id="searchbutton">
             </div>
-            目前字數 <span>{{inputStrLen}}</span>
+            輸入文字：{{inputValue}} 目前字數 <span>{{inputValue.length}}</span>
           </div>
         </div>
         <!-- Search END -->
