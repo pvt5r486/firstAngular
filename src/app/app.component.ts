@@ -6,15 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'firstAngular';
-  link = 'http://www.google.com';
-  imgUrl = '/assets/images/logo.png';
   inputValue = '';
-  changeTitle(altKey: boolean) {
-    if (altKey) {
-      this.title = 'changeTitle';
-    }
-  }
   cleanInput() {
     this.inputValue = '';
   }
