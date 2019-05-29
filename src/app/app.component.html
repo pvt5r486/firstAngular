@@ -10,10 +10,11 @@
         <article class="post" id="post{{idx}}" *ngFor="let item of atticleData; let idx = index">
           <header class="post-header">
             <h2 class="post-title">
-              <a [href]="item.href">{{ item.title }}</a>
+              <a [href]="item.href">{{ item.subject?.title|lowercase|slice:-20 }}</a>
+              <small>{{item.subject?.subtite}}</small>
             </h2>
             <div class="post-info clearfix">
-              <span class="post-date"><i class="glyphicon glyphicon-calendar"></i>{{item.date}}</span>
+              <span class="post-date"><i class="glyphicon glyphicon-calendar"></i>{{item.date|date:'yyyy-MM-dd HH:mm'}}</span>
               <span class="post-author"><i class="glyphicon glyphicon-user"></i><a
                   href="http://blog.miniasp.com/author/will.aspx">{{item.author}}</a></span>
               <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><a
@@ -34,9 +35,7 @@
         <div class="widget search">
           <div class="widget-content">
             <div id="searchbox">
-              <input type="text" placeholder="請輸入搜尋關鍵字" accesskey="s"
-                #tinputValue
-                [(ngModel)]="inputValue"
+              <input type="text" placeholder="請輸入搜尋關鍵字" accesskey="s" #tinputValue [(ngModel)]="inputValue"
                 (keydown.escape)="cleanInput()">
               <input type="button" value="搜尋" id="searchbutton">
             </div>
