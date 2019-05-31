@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
-  atticleData;
+  atticleData: Array<any>;
   constructor() { }
   ngOnInit() {
     /* tslint:disable */
@@ -14,10 +14,7 @@ export class ArticleListComponent implements OnInit {
       {
         "id": 1,
         "href": "http://blog.miniasp.com/post/2016/04/30/Visual-Studio-Code-from-Command-Prompt-notes.aspx",
-        "subject": {
-          "title": "從命令提示字元中開啟 Visual Studio Code 如何避免顯示惱人的偵錯訊息",
-          "subtite": "Visual Studio Code"
-        },
+        "title": "從命令提示字元中開啟 Visual Studio Code 如何避免顯示惱人的偵錯訊息",
         "date": "2016/04/30 18:05",
         "author": "GHJKL",
         "category": "Visual Studio",
@@ -27,6 +24,7 @@ export class ArticleListComponent implements OnInit {
       {
         "id": 2,
         "href": "http://blog.miniasp.com/post/2016/03/22/Does-Certification-Exam-Useful.aspx",
+        "title": "ERTYUIERFTGYHJURTYU",
         "date": "2016/03/22 19:28",
         "author": "GHJKL",
         "category": "心得分享",
@@ -36,11 +34,7 @@ export class ArticleListComponent implements OnInit {
       {
         "id": 3,
         "href": "http://blog.miniasp.com/post/2016/03/14/ASPNET-MVC-Developer-Note-Part-28-Understanding-ModelState.aspx",
-        "subject": {
-          "title": "ASP.NET MVC 開發心得分享 (28)：深入瞭解 ModelState 內部細節",
-          "subtite": ""
-        },
-        "date": "2016/03/14 12:14",
+        "title": "ASP.NET MVC 開發心得分享 (28)：深入瞭解 ModelState 內部2016/03/14 12:14",
         "author": "GHJKL",
         "category": "ASP.NET MVC",
         "category-link": "http://blog.miniasp.com/category/ASPNET-MVC.aspx",
@@ -49,11 +43,7 @@ export class ArticleListComponent implements OnInit {
       {
         "id": 4,
         "href": "http://blog.miniasp.com/post/2016/03/06/ASPNET-MVC-5-View-Roslyn-problem-workaround.aspx",
-        "subject": {
-          "title": "ASP.NET MVC 5.2.3 的 View 使用 Roslyn (C# 6.0) 編譯時的問題",
-          "subtite": ""
-        },
-        "date": "2016/03/06 17:11",
+        "title": "ASP.NET MVC 5.2.3 的 View 使用 Roslyn (C# 6.0) 編譯時的2016/03/06 17:11",
         "author": "GHJKL",
         "category": "ASP.NET MVC",
         "category-link": "http://blog.miniasp.com/category/ASPNET-MVC.aspx",
@@ -62,11 +52,7 @@ export class ArticleListComponent implements OnInit {
       {
         "id": 5,
         "href": "http://blog.miniasp.com/post/2016/02/19/Useful-tool-PackageManagement-OneGet.aspx",
-        "subject": {
-          "title": "介紹好用工具：Win 10 內建的 PackageManagement 套件管理器 (OneGet)",
-          "subtite": ""
-        },
-        "date": "2016/02/19 11:55",
+        "title": "介紹好用工具：Win 10 內建的 PackageManagement 套件管理器 (OneGe2016/02/19 11:55",
         "author": "GHJKL",
         "category": "介紹好用工具",
         "category-link": "http://blog.miniasp.com/category/%E4%BB%8B%E7%B4%B9%E5%A5%BD%E7%94%A8%E5%B7%A5%E5%85%B7.aspx",
@@ -75,11 +61,7 @@ export class ArticleListComponent implements OnInit {
       {
         "id": 6,
         "href": "http://blog.miniasp.com/post/2016/02/02/JavaScript-novice-advice-and-learning-resources.aspx",
-        "subject": {
-          "title": "我要成為前端工程師！給 JavaScript 新手的建議與學習資源整理",
-          "subtite": ""
-        },
-        "date": "2016/02/02 17:48",
+        "title": "我要成為前端工程師！給 JavaScript 新手的建議與學習資源2016/02/02 17:48",
         "author": "GHJKL",
         "category": "前端工程研究",
         "category-link": "http://blog.miniasp.com/category/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E7%A0%94%E7%A9%B6.aspx",
@@ -87,5 +69,19 @@ export class ArticleListComponent implements OnInit {
       }
     ];
   }
-
+  doDelete(item){
+    this.atticleData = this.atticleData.filter(v => v !== item);
+  }
+  doChange($event: any){
+    console.log('AAA');
+    this.atticleData = this.atticleData.map((item)=>{
+      if($event.id === item.id) {
+        // 不要這樣寫 item.title = $event.title;
+        // 當屬性被改動時，要建立新的物件
+        return Object.assign({}, item, $event);
+      }
+      return item;
+    });
+    console.log(this.atticleData);
+  }
 }
