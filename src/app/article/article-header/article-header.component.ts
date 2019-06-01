@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'app-article-header',
   templateUrl: './article-header.component.html',
   styleUrls: ['./article-header.component.scss']
 })
-export class ArticleHeaderComponent implements OnInit {
+export class ArticleHeaderComponent implements OnInit, OnChanges {
   @Input()
   item;
 
@@ -14,25 +14,27 @@ export class ArticleHeaderComponent implements OnInit {
 
   @Output()
   changeTitle = new EventEmitter<any>();
-
+  originData;
   isEdit = false;
-  newTitle = '';
   constructor() { }
 
   ngOnInit() {
-    this.newTitle = this.item.title;
   }
+  ngOnChanges(changes) {
+    if (changes.item) {
+      this.originData = changes.item.currentValue;
+      this.item = Object.assign({}, changes.item.currentValue);
+    }
+  }
+
   deleteArticle() {
     this.delete.emit(this.item);
   }
-  editTitle(e) {
-    console.log('editTitle', e.target);
-    this.newTitle = e.target.value;
-    this.changeTitle.emit({ title: this.newTitle, id: this.item.id });
+  editTitle() {
+    this.changeTitle.emit(this.item);
   }
-  editExit(e) {
-    console.log('editExit', e.target);
-    e.target.value = this.item.title;
+  editExit() {
+    this.item = Object.assign({}, this.originData);
     this.isEdit = false;
   }
 }
