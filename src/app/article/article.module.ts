@@ -5,12 +5,15 @@ import { ArticleHeaderComponent } from './article-header/article-header.componen
 import { ArticleBodyComponent } from './article-body/article-body.component';
 import { FormsModule } from '@angular/forms';
 import { DataService } from './data.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [ArticleListComponent, ArticleHeaderComponent, ArticleBodyComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [DataService],
   exports: [ArticleListComponent]
