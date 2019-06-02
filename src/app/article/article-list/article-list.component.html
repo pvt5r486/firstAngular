@@ -1,6 +1,6 @@
 <!-- Article START-->
-<article class="post" id="post{{idx}}" *ngFor="let item of atticleData; let idx = index">
-  <app-article-header [item]="item" (delete)="doDelete($event)" (changeTitle)="doModify($event)"></app-article-header>
+<article class="post" id="post{{idx}}" *ngFor="let item of atticleData$ | async; let idx = index">
+  <app-article-header [item]="item"></app-article-header>
   <app-article-body [item]="item" [counter]="counter"></app-article-body>
 </article>
 <!-- Article END-->
